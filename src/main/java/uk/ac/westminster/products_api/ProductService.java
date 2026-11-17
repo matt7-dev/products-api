@@ -14,11 +14,11 @@ public class ProductService {
     private Long nextId = 1L;
 
     public ProductService() {
-        products.add(new Product(1L, "Laptop", 999.99));
-        products.add(new Product(2L, "Mouse", 24.99));
-        products.add(new Product(3L, "Keyboard", 59.99));
-        products.add(new DigitalProduct( 4L,"Virus Guard",1500,"httpDownload", 14.5));
-        products.add(new PhysicalProduct(5L,"Graphics Card",999999,1,"50x50x30"));
+//        products.add(new Product(1L, "Laptop", 999.99));
+//        products.add(new Product(2L, "Mouse", 24.99));
+//        products.add(new Product(3L, "Keyboard", 59.99));
+        products.add(new DigitalProduct( 1L,"Virus Guard",1500,"httpDownload", 14.5));
+        products.add(new PhysicalProduct(2L,"Graphics Card",999999,1,"50x50x30"));
     }
 
     public List<Product> getAllProducts() {
@@ -45,6 +45,18 @@ public class ProductService {
         return products.removeIf(p ->
                 p.getId().equals(id)
         );
+    }
+
+    public List<String> getAllSummaries(){
+        List<String> summaries = new ArrayList<>();
+        for (Product p : products){
+//            p.applyDiscount(0.10);
+            if (p instanceof Discountable d) {
+                d.applyDiscount(0.10);
+            }
+            summaries.add(p.getSummary());
+        }
+        return summaries;
     }
 
 }

@@ -28,13 +28,18 @@ public class ProductController {
     }
 
     @PostMapping("/products")
-    public Product addProduct (@RequestBody Product product){
-        return productService.addProduct(product);
+    public Product addProduct (@RequestBody DigitalProduct digiProduct){
+        return productService.addProduct(digiProduct);
     }
 
     @DeleteMapping("/products/{id}")
     public String deleteProduct (@PathVariable Long id){
         return productService.removeProduct(id) ? ("Deleted " + id) : "Delete unsuccessful";
+    }
+
+    @GetMapping("/products/summaries")
+    public List<String> getProductSummaries(){
+        return productService.getAllSummaries();
     }
 
 }
