@@ -33,6 +33,4 @@ public class HelloController {
         return "Goodbye from Spring Boot!";
     }
 
-    // TODO (Activity 3): add your /goodbye endpoint here.
-
 }

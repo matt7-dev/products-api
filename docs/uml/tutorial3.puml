@@ -1,0 +1,50 @@
+@startuml
+' TUTORIAL 3 - Activity 6.
+'
+' The three rules the guide asks you to check:
+'   (a) private attributes carry -, public methods carry +
+'   (b) NOTHING points back up towards the controller
+'   (c) the service's methods are listed with their return types
+class Product {
+  - id : Long
+  - name : String
+  - price : double
+  + getId() : Long
+  + getName() : String
+  + getPrice() : double
+  + setId(id : Long) : void
+  + setName(name : String) : void
+  + setPrice(price : double) : void
+}
+class ProductService {
+  ' The angle brackets are PART OF THE TYPE and must be shown.
+  ' Writing "- products : List" loses the information that makes
+  ' the collection type-safe.
+  - products : List<Product>
+  - nextId : Long
+  + getAllProducts() : List<Product>
+  + getProductById(id : Long) : Optional<Product>
+  + addProduct(product : Product) : Product
+  + deleteProduct(id : Long) : void
+  + findByName(name : String) : List<Product>
+}
+class ProductController {
+  - productService : ProductService
+  + getAllProducts() : List<Product>
+  + getProductById(id : Long) : Product
+  + addProduct(product : Product) : Product
+  + deleteProduct(id : Long) : void
+}
+' ===== The two arrows =====
+' ..>  DASHED line, open arrowhead - a DEPENDENCY.
+' The controller uses the service but does not hold it as part of its
+' own identity: give it a different service and it still works.
+ProductController ..> ProductService
+' -->  SOLID line, open arrowhead - an ASSOCIATION.
+' The service HOLDS products. They are part of its state.
+ProductService --> Product
+' There is NO arrow from the service back to the controller. If you
+' have drawn one, delete it - that is the mistake this activity exists
+' to catch. The service does not know the web layer exists, which is
+' exactly why it would run unchanged in a desktop application.
+@enduml
