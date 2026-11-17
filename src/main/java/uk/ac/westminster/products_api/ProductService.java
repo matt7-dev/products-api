@@ -17,6 +17,8 @@ public class ProductService {
         products.add(new Product(1L, "Laptop", 999.99));
         products.add(new Product(2L, "Mouse", 24.99));
         products.add(new Product(3L, "Keyboard", 59.99));
+        products.add(new DigitalProduct( 4L,"Virus Guard",1500,"httpDownload", 14.5));
+        products.add(new PhysicalProduct(5L,"Graphics Card",999999,1,"50x50x30"));
     }
 
     public List<Product> getAllProducts() {

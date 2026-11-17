@@ -1,0 +1,45 @@
+@startuml
+' TUTORIAL 4 - Activity 4.
+'
+' The three rules task 16 asks you to check:
+'   (a) the hollow triangle touches Product, not the children
+'   (b) neither child box repeats id, name or price
+'   (c) fields are marked -, methods are marked +
+class Product {
+  - id : Long
+  - name : String
+  - price : double
+  + getName() : String
+  + getPrice() : double
+}
+class DigitalProduct {
+  ' TWO fields only. The three inherited ones are NOT repeated -
+  ' the arrow already says this class has them. Repeating them
+  ' claims the child declares its own separate copies, which would
+  ' be a different (and wrong) design.
+  - downloadUrl : String
+  - fileSizeMB : double
+  + getDownloadUrl() : String
+}
+class PhysicalProduct {
+  - weightKg : double
+  - dimensions : String
+  + getWeightKg() : double
+}
+' ===== The inheritance arrows =====
+' <|-- is GENERALISATION (extends): a SOLID line with a HOLLOW
+' TRIANGLE at the parent end.
+'
+' In PlantUML the PARENT goes on the LEFT. Read "Product <|--
+' DigitalProduct" as "Product is generalised by DigitalProduct", or
+' more usefully: the triangle ends up touching Product.
+'
+' Draw it the other way round and the diagram claims Product extends
+' DigitalProduct - the opposite of your code. The guide calls this
+' "the single most frequent mistake in submitted diagrams", so look
+' at the RENDERED picture, not just this text.
+Product <|-- DigitalProduct
+Product <|-- PhysicalProduct
+' Coming in Tutorial 5: a second arrow type, <|.. with DOTS, for
+' implements. One character apart from this one, and markers check it.
+@enduml
